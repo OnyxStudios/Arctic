@@ -9,6 +9,10 @@ let NavStyles = {
         height: '8%',
         backgroundColor: 'green'
     },
+    logo: {
+        width: '15vh',
+        height: '15vh'
+    },
     rightContent: {
         width: '85%',
         height: '100%',
