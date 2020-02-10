@@ -11,7 +11,7 @@ export default class App extends React.Component{
             <div className='body'>
                 <div style={NavStyles.sideNav}>
                     <div style={NavStyles.navLogo}>
-                        <img src='/assets/images/logo.svg' style={NavStyles.logo} />
+                        <img src='/assets/images/logo.svg' alt='logo' style={NavStyles.logo} />
                         <h2>Arctic Panel</h2>
                     </div>
 

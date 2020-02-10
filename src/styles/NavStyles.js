@@ -1,17 +1,27 @@
+const Theme = require('./Theme');
+
 let NavStyles = {
     sideNav: {
-        backgroundColor: 'red',
+        backgroundColor: Theme.sideNavColor,
         width: '15%',
-        height: '100%'
+        height: '100%',
+        zIndex: 1,
+        boxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor,
+        webkitBoxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor,
+        mozBoxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor
     },
     navLogo: {
         width: '100%',
         height: '8%',
-        backgroundColor: 'green'
+        backgroundColor: Theme.logoBGColor,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderBottom: '2px solid ' + Theme.navBorderColor
     },
     logo: {
-        width: '15vh',
-        height: '15vh'
+        width: '8vh',
+        height: '8vh'
     },
     rightContent: {
         width: '85%',
@@ -22,12 +32,16 @@ let NavStyles = {
     topNav: {
         width: '100%',
         height: '8%',
-        backgroundColor: 'blue'
+        backgroundColor: Theme.topNavColor,
+        zIndex: 1,
+        boxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor,
+        webkitBoxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor,
+        mozBoxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor
     },
     content: {
         width: '100%',
         height: '92%',
-        backgroundColor: 'pink'
+        backgroundColor: Theme.contentColor
     }
 };
 
