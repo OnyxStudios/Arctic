@@ -8,7 +8,8 @@ let defaultTheme = {
     navTextColor: '#FFFFFF',
     navCategoryColor: '#101216',
     categoryTextColor: '#424E56',
-    sideNavActiveColor: '#282d38'
+    sideNavActiveColor: '#282d38',
+    redColor: '#ff1744'
 };
 
 module.exports = defaultTheme;

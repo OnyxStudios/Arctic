@@ -1,15 +1,18 @@
 import React from 'react';
-import {withStyles} from "@material-ui/core";
+import {withStyles, Menu, MenuItem, Button, ListItemIcon, ListItemText} from "@material-ui/core";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {NavStyles, MaterialStyles} from './styles/NavStyles';
 import ServersScreen from './screens/ServersScreen';
 const Navigation = require('./utils/Navigation');
+const Theme = require('./styles/Theme');
 
 class App extends React.Component {
 
     state = {
         active: 'Servers',
         dropdown: [],
-        Screen: ServersScreen
+        Screen: ServersScreen,
+        optionsAnchor: null
     };
 
     constructor(props) {
@@ -17,6 +20,15 @@ class App extends React.Component {
         this.toggleDropdown = this.toggleDropdown.bind(this);
         this.navigate = this.navigate.bind(this);
     }
+
+    setOptionsAnchor = (event) => {
+        let target = event.currentTarget;
+        this.setState({optionsAnchor: target});
+    };
+
+    closeUserOptions = () => {
+      this.setState({optionsAnchor: null});
+    };
 
     toggleDropdown(name) {
         let {dropdown} = this.state;
@@ -35,7 +47,8 @@ class App extends React.Component {
     }
 
     render() {
-        let {Screen, active, dropdown} = this.state;
+        let {Screen, active, dropdown, optionsAnchor} = this.state;
+        let {classes} = this.props;
 
         return (
             <div className='body'>
@@ -64,7 +77,32 @@ class App extends React.Component {
 
                 <div style={NavStyles.rightContent}>
                     <div style={NavStyles.topNav}>
-                        Top Navigation
+                        <p style={NavStyles.screenTitle}>{active}</p>
+                        <div style={NavStyles.userContent}>
+                            <Button aria-controls='userOptions' aria-owns='userOptions' aria-haspopup='true' onClick={this.setOptionsAnchor}>
+                                <AccountCircleIcon style={{color: Theme.navTextColor, marginRight: 5}} />
+                                <p style={{color: Theme.navTextColor}}>abused_master</p>
+                            </Button>
+
+
+                            <Menu
+                                open={Boolean(optionsAnchor)}
+                                anchorEl={optionsAnchor}
+                                onClose={this.closeUserOptions}
+                                id='userOptions'
+                                elevation={0}
+                                getContentAnchorEl={null}
+                                anchorOrigin={{vertical: 'bottom'}}
+                                transformOrigin={{vertical: 'top'}}
+                            >
+                                <MenuItem onClick={() => {
+                                    let settingsOpt = Navigation.mainNavigation.general[1];
+                                    this.navigate(settingsOpt.name, settingsOpt.screen);
+                                    this.closeUserOptions();
+                                }}><i style={{marginRight: 5}} className='fas fa-cog' /> Settings</MenuItem>
+                                <MenuItem className={classes.logoutItem} onClick={null}><i style={{marginRight: 5}} className='fas fa-sign-out-alt' /> Logout</MenuItem>
+                            </Menu>
+                        </div>
                     </div>
 
                     <div style={NavStyles.content}>

@@ -46,7 +46,12 @@ let NavStyles = {
         zIndex: 1,
         boxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor,
         WebkitBoxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor,
-        MozBoxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor
+        MozBoxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        overflow: 'hidden'
     },
     content: {
         width: '100%',
@@ -65,32 +70,13 @@ let NavStyles = {
         padding: 5,
         color: Theme.categoryTextColor
     },
-    option: {
-        width: '100%',
-        height: 'auto',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        ':hover': {
-            cursor: 'pointer',
-            backgroundColor: Theme.sideNavActiveColor
-        }
-    },
-    optionName: {
+    screenTitle: {
         color: Theme.navTextColor,
-        padding: 5,
+        fontWeight: 'bold',
         paddingLeft: 10
     },
-    dropdownOptionContainer: {
-        width: '100%',
-        height: 'auto',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        ':hover': {
-            cursor: 'pointer',
-            backgroundColor: Theme.sideNavActiveColor
-        }
+    userContent: {
+        marginRight: 10
     }
 };
 
@@ -112,10 +98,14 @@ const MaterialStyles = theme => ({
         },
         '&.Mui-selected': {
             backgroundColor: Theme.sideNavActiveColor,
+            borderLeft: '4px solid ' + Theme.topNavColor,
             '&:hover': {
                 backgroundColor: Theme.sideNavActiveColor
             },
         }
+    },
+    logoutItem: {
+        color: Theme.redColor
     }
 });
 
