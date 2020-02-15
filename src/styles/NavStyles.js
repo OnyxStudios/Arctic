@@ -98,7 +98,7 @@ const MaterialStyles = theme => ({
         },
         '&.Mui-selected': {
             backgroundColor: Theme.sideNavActiveColor,
-            borderLeft: '4px solid ' + Theme.topNavColor,
+            borderLeft: '4px solid ' + Theme.blueColor,
             '&:hover': {
                 backgroundColor: Theme.sideNavActiveColor
             },

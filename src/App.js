@@ -1,5 +1,5 @@
 import React from 'react';
-import {withStyles, Menu, MenuItem, Button, ListItemIcon, ListItemText} from "@material-ui/core";
+import {withStyles, Menu, MenuItem, Button} from "@material-ui/core";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {NavStyles, MaterialStyles} from './styles/NavStyles';
 import ServersScreen from './screens/ServersScreen';

@@ -1,7 +1,8 @@
 let defaultTheme = {
+    textColor: '#000',
     sideNavLeftColor: '#191B22',
     sideNavRightColor: '#191B22',
-    topNavColor: '#2196f3',
+    topNavColor: '#1976D2',
     contentColor: '#EEEEEE',
     boxShadowColor: '#000',
     navBorderColor: '#444D58',
@@ -9,7 +10,9 @@ let defaultTheme = {
     navCategoryColor: '#101216',
     categoryTextColor: '#424E56',
     sideNavActiveColor: '#282d38',
-    redColor: '#ff1744'
+    redColor: '#ff1744',
+    blueColor: '#2196f3',
+    greenColor: '#00e676'
 };
 
 module.exports = defaultTheme;
