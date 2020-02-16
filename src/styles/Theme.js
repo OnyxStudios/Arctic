@@ -13,8 +13,11 @@ let defaultTheme = {
     redColor: '#ff1744',
     blueColor: '#2196f3',
     greenColor: '#00e676',
+    warningColor: '#ffc107',
     buttonLeftColor: '#2196f3',
-    buttonRightColor: '#dd33fa'
+    buttonRightColor: '#dd33fa',
+    serverCardColor: '#191B22',
+    serverCardTextColor: '#FFFFFF'
 };
 
 module.exports = defaultTheme;

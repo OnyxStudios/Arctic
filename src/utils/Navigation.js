@@ -96,11 +96,11 @@ const adminNavigation = {
     ]
 };
 
-function renderCategory(navigation, categoryName, toggleDropdown, dropdownState, props, active, navigate) {
-    return <List component='div'>{this.renderCategoryItems(navigation, categoryName, toggleDropdown, dropdownState, props, active, navigate)}</List>
+function renderCategory(navigation, categoryName, toggleDropdown, dropdownState, props, active, navigate, showNavText) {
+    return <List component='div'>{this.renderCategoryItems(navigation, categoryName, toggleDropdown, dropdownState, props, active, navigate, showNavText)}</List>
 }
 
-function renderCategoryItems (navigation, categoryName, toggleDropdown, dropdownState, props, active, navigate) {
+function renderCategoryItems (navigation, categoryName, toggleDropdown, dropdownState, props, active, navigate, showNavText) {
     const {classes} = props;
     let category = navigation[categoryName];
 
@@ -110,7 +110,7 @@ function renderCategoryItems (navigation, categoryName, toggleDropdown, dropdown
                 <div key={option.name}>
                     <ListItem className={classes.listItem} button onClick={() => toggleDropdown(option.name)}>
                         <ListItemIcon className={classes.icon}><i className={option.icon} /></ListItemIcon>
-                        <ListItemText primary={option.name} />
+                        {showNavText ? <ListItemText primary={option.name} /> : null}
                         {~dropdownState.indexOf(option.name) ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
 
@@ -119,7 +119,7 @@ function renderCategoryItems (navigation, categoryName, toggleDropdown, dropdown
                             return (
                                 <ListItem key={subOption.name} selected={active === option.name} className={classes.nestedListItem} button onClick={() => navigate(subOption.name, subOption.screen)}>
                                     <ListItemIcon className={classes.icon}><i className={subOption.icon} /></ListItemIcon>
-                                    <ListItemText primary={subOption.name} />
+                                    {showNavText ? <ListItemText primary={subOption.name} /> : null}
                                 </ListItem>
                             );
                         })}
@@ -131,7 +131,7 @@ function renderCategoryItems (navigation, categoryName, toggleDropdown, dropdown
         return (
             <ListItem key={option.name} selected={active === option.name} className={classes.listItem} button onClick={() => navigate(option.name, option.screen)}>
                 <ListItemIcon className={classes.icon}><i className={option.icon} /></ListItemIcon>
-                <ListItemText primary={option.name} />
+                {showNavText ? <ListItemText primary={option.name} /> : null}
             </ListItem>
         );
     });

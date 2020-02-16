@@ -12,7 +12,11 @@ class PanelPage extends React.Component {
         active: 'Servers',
         dropdown: [],
         Screen: ServersScreen,
-        optionsAnchor: null
+        optionsAnchor: null,
+        showNavText: true,
+        //Set Default Universal Resolution
+        width: 1920,
+        height: 1080
     };
 
     constructor(props) {
@@ -20,6 +24,24 @@ class PanelPage extends React.Component {
         this.toggleDropdown = this.toggleDropdown.bind(this);
         this.navigate = this.navigate.bind(this);
     }
+
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener("resize", this.updateWindowDimensions.bind(this));
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateWindowDimensions.bind(this));
+    }
+
+    updateWindowDimensions = () => {
+        this.setState({width: window.innerWidth, height: window.innerHeight});
+        if(window.innerWidth < 800) {
+            this.setState({showNavText: false});
+        }else if(window.innerWidth > 800) {
+            this.setState({showNavText: true});
+        }
+    };
 
     setOptionsAnchor = (event) => {
         let target = event.currentTarget;
@@ -47,14 +69,14 @@ class PanelPage extends React.Component {
     }
 
     render() {
-        let {Screen, active, dropdown, optionsAnchor} = this.state;
+        let {Screen, active, dropdown, optionsAnchor, showNavText} = this.state;
         let {classes} = this.props;
 
         return (
             <div className='body' style={{display: 'flex', flexDirection: 'row'}}>
                 <div style={NavStyles.sideNav}>
                     <div style={NavStyles.navLogo}>
-                        <img src='/assets/images/logo.svg' alt='logo' style={NavStyles.logo} />
+                        <img src='/assets/images/logo.png' alt='logo' style={NavStyles.logo} />
                         <h2 style={NavStyles.logoText}>Arctic Panel</h2>
                     </div>
                     <hr style={NavStyles.divider} />
@@ -62,17 +84,17 @@ class PanelPage extends React.Component {
                     <div style={NavStyles.navCategory}>
                         <p style={NavStyles.categoryText}>General</p>
                     </div>
-                    {Navigation.renderCategory(Navigation.mainNavigation, 'general', this.toggleDropdown, dropdown, this.props, active, this.navigate)}
+                    {Navigation.renderCategory(Navigation.mainNavigation, 'general', this.toggleDropdown, dropdown, this.props, active, this.navigate, showNavText)}
 
                     <div style={NavStyles.navCategory}>
                         <p style={NavStyles.categoryText}>Server</p>
                     </div>
-                    {Navigation.renderCategory(Navigation.mainNavigation, 'server', this.toggleDropdown, dropdown, this.props, active, this.navigate)}
+                    {Navigation.renderCategory(Navigation.mainNavigation, 'server', this.toggleDropdown, dropdown, this.props, active, this.navigate, showNavText)}
 
                     <div style={NavStyles.navCategory}>
                         <p style={NavStyles.categoryText}>Admin</p>
                     </div>
-                    {Navigation.renderCategory(Navigation.mainNavigation, 'admin', this.toggleDropdown, dropdown, this.props, active, this.navigate)}
+                    {Navigation.renderCategory(Navigation.mainNavigation, 'admin', this.toggleDropdown, dropdown, this.props, active, this.navigate, showNavText)}
                 </div>
 
                 <div style={NavStyles.rightContent}>
@@ -81,7 +103,7 @@ class PanelPage extends React.Component {
                         <div style={NavStyles.userContent}>
                             <Button aria-controls='userOptions' aria-owns='userOptions' aria-haspopup='true' onClick={this.setOptionsAnchor}>
                                 <AccountCircleIcon style={{color: Theme.navTextColor, marginRight: 5}} />
-                                <p style={{color: Theme.navTextColor}}>abused_master</p>
+                                <p style={{color: Theme.navTextColor, fontSize: '100%'}}>abused_master</p>
                             </Button>
 
                             <Menu

@@ -1,54 +1,99 @@
 import React from 'react';
-import {Card, Grid, CardMedia, Divider, withStyles} from "@material-ui/core";
-import {TEXTURES} from "./../utils/MinecraftImages";
-import {ServersStyles, MaterialServerStyles} from "../styles/ServersStyles";
+import {Grid, Divider} from "@material-ui/core";
+import {TEXTURES, BACKGROUNDS} from "./../utils/MinecraftImages";
+import {ServersStyles} from "../styles/ServersStyles";
+import Theme from './../styles/Theme';
 
-let okStatuses = ['online', 'starting'];
-let errorStatuses = ['error', 'offline'];
-class ServersScreen extends React.Component {
+export default class ServersScreen extends React.Component {
 
-    serverInstance = (icon, name, ip, status, ram, storage, id) => {
-        let {classes} = this.props;
+    state = {
+        width: 1920,
+        height: 1080,
+        minCardWidth: 495,
+        cardWidth: 495,
+        cardHeight: 160,
+        margins: 51,
+        renderXSGrid: false
+    };
+
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener("resize", this.updateWindowDimensions.bind(this));
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateWindowDimensions.bind(this));
+    }
+
+    statusColor = (status) => {
+        return status === 'ONLINE' ? Theme.greenColor : status === 'ERROR' ? Theme.warningColor : Theme.redColor;
+    };
+
+    updateWindowDimensions = () => {
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let renderAreaWidth = width * 0.88;
+        let renderAreaHeight = height * 0.94;
+        let minCardWidth = 495;
+        let minCardHeight = 160;
+
+        let renderXSGrid = width < minCardWidth;
+        let cardHeight = renderAreaHeight / Math.floor(renderAreaHeight / minCardHeight);
+
+        let cardWidth = renderXSGrid ? renderAreaWidth - 100 : minCardWidth;
+        let cardCapacity = renderXSGrid ? 1 : Math.floor(renderAreaWidth / cardWidth);
+        let margins = renderXSGrid ? 50 : (renderAreaWidth - (cardWidth * cardCapacity)) / (cardCapacity + 1);
+
+        this.setState({width, height, renderXSGrid, cardWidth, cardHeight, margins});
+    };
+
+    serverInstance = (icon, background, name, ip, status, ram, storage, id) => {
+        let {renderXSGrid, cardWidth, cardHeight, margins} = this.state;
+        let textStyle = {fontSize: renderXSGrid ? '0.70em' : 18, margin: 0};
 
         return (
-            <Grid  item className={classes.serverCard}>
-                <Card>
-                    <CardMedia className={classes.serverIcon} image={icon} component='img' />
+            <Grid sm={renderXSGrid} item style={{...ServersStyles.serverCard, width: cardWidth, height: cardHeight, marginRight: margins}} direction='column'>
+                <div className='serverCard' style={{...ServersStyles.cardHeader, borderTop: '4px solid ' + this.statusColor(status)}}>
+                    <div style={ServersStyles.serverInfo}>
+                        <img src={icon} style={ServersStyles.serverIcon} alt='' />
+                        <span style={{paddingLeft: 10}}>
+                            <p style={textStyle}>{name}</p>
+                            <p style={textStyle}>IP: {ip}</p>
+                        </span>
+                    </div>
 
-                    <Grid container className={classes.serverInfoGrid} direction='row' justify='space-between'>
-                        <Grid item>
-                            <p>{name}</p>
-                            <p>IP: {ip}</p>
-                        </Grid>
+                    <div style={{...ServersStyles.serverStatus, backgroundColor: this.statusColor(status)}}>
+                        <p style={textStyle}>{status}</p>
+                    </div>
+                </div>
 
-                        <Grid item>
-                            <p style={okStatuses.indexOf(status.toLowerCase()) > -1 ? ServersStyles.running : ServersStyles.offline}>{status}</p>
-                        </Grid>
-                    </Grid>
+                <div style={{...ServersStyles.cardFooter, backgroundImage: 'url(' + background + ')'}}>
 
-                    <Divider variant='middle' />
-
-                    <Grid container justify='space-evenly'>
-                        <Grid item><p><i className='fas fa-memory' /> {ram} GB</p></Grid>
-                        <Grid item><p><i className='fas fa-hdd' /> {storage} GB</p></Grid>
-                        <Grid item><p ><i className='fas fa-fingerprint' /> ID: {id}</p></Grid>
-                    </Grid>
-                </Card>
+                    <div style={ServersStyles.gameLogo}>
+                        <img src='/assets/images/minecraft/minecraft.png' style={{width: '40%'}} alt='' />
+                        <Divider variant='middle'  />
+                    </div>
+                    <div style={ServersStyles.serverSpecs}>
+                        <p style={{fontSize: renderXSGrid ? '0.75em' : 18, paddingLeft: 10, paddingRight: 10}}><i className='fas fa-memory' /> {ram} GB</p>
+                        <p style={{fontSize: renderXSGrid ? '0.75em' : 18, paddingLeft: 10, paddingRight: 10}}><i className='fas fa-hdd' /> {storage} GB</p>
+                        <p style={{fontSize: renderXSGrid ? '0.75em' : 18, paddingLeft: 10, paddingRight: 10}}><i className='fas fa-fingerprint' /> ID: {id}</p>
+                    </div>
+                </div>
             </Grid>
         );
     };
 
     render() {
-        let {classes} = this.props;
+        let {margins} = this.state;
 
         return (
-            <Grid container className={classes.serverBody} justify='space-between'>
-                {this.serverInstance(TEXTURES.GRASS, 'A Minecraft Server', '30.99.244.213', 'ONLINE', '4', '20', '456782')}
-                {this.serverInstance(TEXTURES.COBBLESTONE, 'Another Server', '30.99.244.213:25564', 'OFFLINE', '2', '50', '654238')}
-                {this.serverInstance(TEXTURES.BEDROCK, 'Modpack Server', '30.99.244.213:35567', 'ERROR', '8', '50', '654812')}
-            </Grid>
+            <div style={ServersStyles.serversBody}>
+                <Grid container direction='row' wrap='wrap' style={{...ServersStyles.serversGrid, paddingLeft: margins}}>
+                    {this.serverInstance(TEXTURES.IRON, BACKGROUNDS.BLURRED1, 'Server 1', '30.99.244.213:35567', 'ONLINE', '8', '50', '654812')}
+                    {this.serverInstance(TEXTURES.DIAMOND, BACKGROUNDS.BLURRED2, 'Server 2', '30.99.244.213:35567', 'OFFLINE', '8', '50', '654812')}
+                    {this.serverInstance(TEXTURES.ENDSTONE, BACKGROUNDS.BLURRED3, 'Test Server 3', '30.99.244.213:35567', 'ERROR', '8', '50', '654812')}
+                </Grid>
+            </div>
         );
     }
 }
-
-export default withStyles(MaterialServerStyles)(ServersScreen);

@@ -13,4 +13,10 @@ let TEXTURES = {
     STONE: '/assets/images/minecraft/stone.png',
 };
 
-export {TEXTURES};
+let BACKGROUNDS = {
+    BLURRED1: '/assets/images/minecraft/blurred1.png',
+    BLURRED2: '/assets/images/minecraft/blurred2.png',
+    BLURRED3: '/assets/images/minecraft/blurred3.png',
+};
+
+export {TEXTURES, BACKGROUNDS};

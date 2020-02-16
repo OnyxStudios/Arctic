@@ -1,74 +1,69 @@
 const Theme = require('./Theme');
 
 let ServersStyles = {
-    running: {
-        color: Theme.navTextColor,
-        fontWeight: 'bold',
-        backgroundColor: Theme.greenColor,
-        borderRadius: 2,
-        padding: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textShadow: '2px 2px 4px ' + Theme.boxShadowColor
-    },
-    offline: {
-        color: Theme.navTextColor,
-        fontWeight: 'bold',
-        backgroundColor: Theme.redColor,
-        borderRadius: 2,
-        padding: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textShadow: '2px 2px 4px ' + Theme.boxShadowColor
-    }
-};
-
-const MaterialServerStyles = theme => ({
-    serverBody: {
-        flexGrow: 1,
+    serversBody: {
+        overflowY: 'auto',
         width: '100%',
-        height: '100%',
-        paddingLeft: 50,
-        paddingRight: 50,
-        paddingTop: 50,
-        overflowY: 'auto'
+        height: '100%'
+    },
+    serversGrid: {
+        width: '100%',
+        marginTop: 100
     },
     serverCard: {
         position: 'relative',
-        maxWidth: '30%',
-        width: '100%',
-        height: 'auto',
-        maxHeight: '20%',
-        overflow: 'initial',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        marginTop: 50
+        borderRadius: 4,
+        marginBottom: 50,
+        boxShadow: '8px 10px 24px -5px ' + Theme.boxShadowColor
     },
-    serverIcon: {
-        position: 'absolute',
-        width: '20%',
-        marginTop: -25,
-        marginLeft: 20,
-        backgroundColor: Theme.blueColor,
-        borderRadius: 2,
-        boxShadow: '8px 10px 24px -5px rgba(0, 0, 0, 0.50)'
+    cardHeader: {
+        backgroundColor: Theme.serverCardColor,
+        width: '100%',
+        height: '30%',
+        display: 'flex',
+        flexDirection: 'row',
+        overflow: 'hidden',
+        color: Theme.serverCardTextColor
     },
     serverInfo: {
-        width: '100%',
+        width: '80%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    serverIcon: {
         height: '100%',
+        backgroundColor: Theme.blueColor
+    },
+    serverStatus: {
+        width: '20%',
+        textShadow: '2px 2px 4px ' + Theme.boxShadowColor,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    cardFooter: {
+        width: '100%',
+        height: '70%',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between'
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        color: Theme.serverCardTextColor
     },
-    serverInfoGrid: {
-        marginLeft: 'calc(20% + 20px)',
-        width: 'calc(100% - (20% + 20px))',
-        paddingLeft: 10,
-        paddingRight: 20
+    serverSpecs: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    gameLogo: {
+        width: '100%',
+        textAlign: 'center'
     }
-});
+};
 
-export {ServersStyles, MaterialServerStyles};
+export {ServersStyles};

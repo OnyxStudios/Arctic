@@ -3,14 +3,15 @@ const Theme = require('./Theme');
 let NavStyles = {
     sideNav: {
         background: 'linear-gradient(180deg, ' + Theme.sideNavLeftColor + ' 0%, ' + Theme.sideNavRightColor + ' 100%)',
-        width: '12%',
+        minWidth: '12%',
         height: '100%',
         zIndex: 1,
         boxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor,
         WebkitBoxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor,
         MozBoxShadow: '10px 10px 56px -19px ' + Theme.boxShadowColor,
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        overflowY: 'auto'
     },
     navLogo: {
         width: '100%',
@@ -28,10 +29,11 @@ let NavStyles = {
     },
     logo: {
         width: '6vh',
-        height: '6vh'
+        min: '6vh'
     },
     logoText: {
-        color: Theme.navTextColor
+        color: Theme.navTextColor,
+        fontSize: '100%'
     },
     rightContent: {
         width: '88%',
@@ -59,7 +61,8 @@ let NavStyles = {
         backgroundColor: Theme.contentColor
     },
     navCategory: {
-        width: '100%',
+        width: 'auto',
+        maxWidth: '100%',
         height: 'auto',
         backgroundColor: Theme.navCategoryColor
     },
@@ -87,11 +90,19 @@ const MaterialStyles = theme => ({
     nestedListItem: {
         paddingLeft: theme.spacing(4),
         color: Theme.navTextColor,
+        width: 'auto',
+        maxWidth: '100%',
+        wordWrap: 'break-word',
+        fontSize: '100%',
         '&:hover': {
             backgroundColor: Theme.sideNavActiveColor
         }
     },
     listItem: {
+        width: 'auto',
+        maxWidth: '100%',
+        wordWrap: 'break-word',
+        fontSize: '100%',
         color: Theme.navTextColor,
         '&:hover': {
             backgroundColor: Theme.sideNavActiveColor
