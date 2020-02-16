@@ -12,7 +12,9 @@ let defaultTheme = {
     sideNavActiveColor: '#282d38',
     redColor: '#ff1744',
     blueColor: '#2196f3',
-    greenColor: '#00e676'
+    greenColor: '#00e676',
+    buttonLeftColor: '#2196f3',
+    buttonRightColor: '#dd33fa'
 };
 
 module.exports = defaultTheme;
