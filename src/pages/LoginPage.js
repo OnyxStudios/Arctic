@@ -44,7 +44,7 @@ class LoginPage extends React.Component {
             <div className='body' style={LoginStyles.loginBody}>
                 <Card className={classes.loginCard}>
                     <CardContent style={{textAlign: 'center'}}>
-                        <img style={LoginStyles.logo} src='/assets/images/logo.png' />
+                        <img style={LoginStyles.logo} src='/assets/images/logo.png' alt='' />
 
                         <h2 style={LoginStyles.loginTitle}>Login</h2>
                         {incorrectDetails ? <h4 style={LoginStyles.invalidLogin}>Invalid Username or Password!</h4> : null}

@@ -1,4 +1,4 @@
-const Theme = require('./Theme');
+import Theme from './../styles/Theme';
 
 let NavStyles = {
     sideNav: {

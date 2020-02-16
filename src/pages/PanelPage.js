@@ -3,8 +3,8 @@ import {withStyles, Menu, MenuItem, Button} from "@material-ui/core";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {NavStyles, MaterialStyles} from './../styles/NavStyles';
 import ServersScreen from './../screens/ServersScreen';
+import Theme from './../styles/Theme';
 const Navigation = require('./../utils/Navigation');
-const Theme = require('./../styles/Theme');
 
 class PanelPage extends React.Component {
 

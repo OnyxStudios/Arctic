@@ -1,6 +1,6 @@
 import React from 'react';
 
-class MyAccountScreen extends React.Component {
+export default class MyAccountScreen extends React.Component {
 
     render() {
         return (
@@ -10,5 +10,3 @@ class MyAccountScreen extends React.Component {
         );
     }
 }
-
-export default MyAccountScreen;

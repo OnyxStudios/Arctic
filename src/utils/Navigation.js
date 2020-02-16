@@ -2,6 +2,7 @@ import React from 'react';
 import {List, ListItem, Collapse, ListItemIcon, ListItemText} from "@material-ui/core";
 import {ExpandMore, ExpandLess} from "@material-ui/icons";
 import ServersScreen from './../screens/ServersScreen';
+import MyAccountScreen from './../screens/MyAccountScreen';
 
 const mainNavigation = {
     general: [
@@ -13,7 +14,7 @@ const mainNavigation = {
         {
             name: 'My Account',
             icon: 'fas fa-sliders-h',
-            screen: null
+            screen: MyAccountScreen
         }
     ],
     server: [
